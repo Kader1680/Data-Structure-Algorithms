@@ -1,30 +1,29 @@
 #include <iostream>
 using namespace std;
-void selectionSort(int arr[], int size){
-    for (int i = 0; i < size; i++)
-    {
-        int minIndex = i;
-        for (int j = i + 1; j < size; j++)
-        {
-            if (arr[j] < arr[minIndex] )
-            {
-                minIndex = j;
-            }
-        }
-        if ( i != minIndex){      
-            int temp = arr[i];
-            arr[i] = arr[minIndex];
-            arr[minIndex] = temp;
-        }
+#include <vector>
+#include <algorithm>
+
+vector<int> selectionSort(vector<int> arr){
+  int size = arr.size();
+  for (int i = 0; i < size - 1; i++) {
+    int min = i;
+    for (int j = i + 1; j < size; j++) {
+       if(arr[j] < arr[min]){
+          min = j;
+       }
+       swap(arr[i], arr[min]);
     }
+  }
+  return arr;
 }
-int main(int argc, char const *argv[]){
-        int array[] = {63, 8, 3, 2, 22};
-        int mysize  = sizeof(array) /  sizeof(array[0]);
-        selectionSort(array, mysize);
-        for (auto v : array)
-        {
-                cout<<v<<" ";
-        }
-         
+int main() 
+{
+    vector<int> data = {64, 25, 12, 22, 11};
+    vector<int> sortedData = selectionSort(data);
+
+    cout << "Sorted Array: ";
+    for (int num : sortedData) {
+        cout << num << " ";
+    }
+    cout << endl;
 }
